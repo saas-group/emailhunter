@@ -19,7 +19,7 @@ module EmailHunter
     private
 
     def apiresponse
-      url = URI.parse(URI.encode("#{API_COUNT_URL}domain=#{@domain}"))
+      url = "#{API_COUNT_URL}#{URI.encode_www_form(domain: @domain)}"
       response = Faraday.new(url).get
       response.success? ? JSON.parse(response.body, {symbolize_names: true}) : []
     end

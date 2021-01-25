@@ -21,7 +21,7 @@ module EmailHunter
     private
 
     def apiresponse
-      url = URI.parse(URI.encode("#{API_ACCOUNT_URL}&api_key=#{@key}"))
+      url = "#{API_ACCOUNT_URL}#{URI.encode_www_form(api_key: @key)}"
       response = Faraday.new(url).get
       response.success? ? JSON.parse(response.body, { symbolize_names: true }) : []
     end
